@@ -51,6 +51,44 @@ console.log("the body of requist is:",req.body);
 
 });
 
+app.delete('/tasks/:_id',(req,res)=>{
+    console.log("the body of requist is:",req.params);
+    
+        Todo.deleteOne(req.params,(err,data)=>{
+    
+            if(err){
+                console.log('Error:',err)
+            }else{
+    
+                res.status(201).json(data);
+    
+    
+            }
+    
+        });
+    
+    });
+
+
+    app.put('/tasks/:_id/:title',(req,res)=>{
+        console.log("the body of requist is:",req.body);
+        
+            Todo.updateOne({_id:req.params._id},{title:req.params.title},(err,data)=>{
+        
+                if(err){
+                    console.log('Error:',err)
+                }else{
+        
+                    res.status(400).json(data);
+        
+        
+                }
+        
+            });
+        
+        });
+    
+
 
 
 
