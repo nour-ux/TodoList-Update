@@ -3,6 +3,7 @@ const { json } = require("express/lib/response")
 const app= express()
 const db=require("./db")
 const Todo =require("./model")
+const Users =require("./model2")
 const cors=require("cors")
 // console.log(Todo)
 
@@ -186,6 +187,67 @@ app.put('/updatetasks/:_id/:isCompleted',(req,res)=>{
                 });
             
             });
+
+
+app.post('/Users/register',(req,res)=>{
+                console.log("the body of requist is:",req.body);
+                // console.log(res._final);
+
+                
+                Users.create(req.body,(err,data)=>{
+                
+                        if(err){
+                            console.log('Error:',err);
+                            res.status(400).json({message:"this email is token"});
+                
+                        }else{
+                
+                            res.status(201).json("Create new User Successfully");
+                                // console.log(data);
+
+                
+                
+                        }
+                
+                    });
+                
+                });
+
+
+app.post('/Users/login',(req,res)=>{
+                    console.log("the body of requist is:",req.body);
+                    // console.log(res._final);
+    
+                    // data:is the result of the find() function.
+                    Users.find({email:req.body.email},(err,data)=>{
+                    
+                            if(err){
+                                console.log('Error:',err);
+                                res.status(400).json({message:"this email is token"});
+                    
+                            }else{
+                                
+                                if(data.length === 1){
+                                    if(req.body.password === data[0].password){
+                                        res.status(200).json({message:"login successfully",Username:data[0].username});
+
+
+                                    }else{
+                                        res.status(404).json({message:"email entered is not registered"});
+
+                                    }
+                                }
+                                res.status(201).json("Create new User Successfully");
+                                    // console.log(data);
+    
+                    
+                    
+                            }
+                    
+                        });
+                    
+                    });                
+
     
 
 

@@ -1,9 +1,9 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import React,{ useState , useEffect} from 'react';
 import Todo from './components/Todo';
 import Add from './components/Add';
-
+import { Routes, Route, Link } from "react-router-dom";
 import axios from "axios"
 
 
@@ -42,9 +42,6 @@ function App() {
   }
   useEffect(()=>{ getData()},[]);
 
-
-
-
   const getDatas=(status)=>{
     axios
     .get(`http://localhost:5000/completed?isCompleted=${status}`)
@@ -72,8 +69,7 @@ function App() {
   
     });
   }
-
-  
+ 
   const CraeteData=(body)=>{
     axios
     .post('http://localhost:5000/tasks',body)
@@ -239,7 +235,21 @@ const TaskTodo =Tasks.map((elem,i)=>(
 
 
 return (
-    <div className="App">
+
+<div className="App">
+
+  {/* <Routes>
+        <Route path="/" element={<Todo />} />
+        <Route path="about" element={<Add />} />
+      </Routes>
+
+  
+      <nav>
+        <Link to="/Add">Add Section</Link>
+      </nav> */}
+
+
+    
 <p>First App</p>
 <Add create={CraeteData} deleteALL={deleteALL} Finished={Finished}/>
 <button onClick={getData}>Get Todos</button>
@@ -247,8 +257,11 @@ return (
 <button onClick={()=>{getDatas(false)}}>Get Pinding Todos</button>
 {TaskTodo} 
 
-  
+
+
     
+
+
     </div>
   );
 }

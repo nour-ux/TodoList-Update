@@ -35,6 +35,7 @@ return(
 
          <span>{title}</span>
          <button onClick={()=>{props.deleteT(_id)}}>x</button>
+
          
         
     </div>

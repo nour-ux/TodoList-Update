@@ -3,8 +3,6 @@ import React,{useState}  from "react";
 export default function Add(props){
 const [newtask,CTodo] = useState("");
 
-const {_id,title,isCompleted} = props.create;
-
 const cdata=()=>{ props.create({title: newtask ,isCompleted:false})}
     return(
 
